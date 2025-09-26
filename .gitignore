@@ -1,17 +1,7 @@
-# Ignore everything by default
-*
-
-# Allow these files/folders to be tracked
-!.gitignore
-!README.md
-!docker-compose.yml
-!frontend/
-!backend/
-!README.txt
-!docker-compose.yml
-!Architecture%20daigram.png
 
 # Inside whitelisted folders, you may still want to ignore heavy stuff:
-frontend/node_modules/
-backend/venv/
+**/node_modules/
+**/venv/
+**/venv_new/
+**/.venv/
 **/.env
