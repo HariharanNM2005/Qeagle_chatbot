@@ -1,0 +1,53 @@
+version: "3.9"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: rag-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # Map envs as needed; these are typical
+      - MONGODB_URL=${MONGODB_URL}
+      - MONGODB_DATABASE=${MONGODB_DATABASE}
+      - MONGODB_COLLECTION=${MONGODB_COLLECTION}
+      - MONGODB_VECTOR_INDEX=${MONGODB_VECTOR_INDEX}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENROUTER_MODEL=${OPENROUTER_MODEL}
+      - APP_NAME=${APP_NAME}
+      - DEBUG=${DEBUG}
+      - HOST=${HOST}
+      - PORT=${PORT}
+      - CORS_ORIGINS=${CORS_ORIGINS}
+      - VECTOR_DIMENSION=${VECTOR_DIMENSION}
+      - VECTOR_SEARCH_TOP_K=${VECTOR_SEARCH_TOP_K}
+      - EMBEDDING_MODEL=${EMBEDDING_MODEL}
+      - EMBEDDING_DIMENSION=${EMBEDDING_DIMENSION}
+    depends_on:
+      - mongo
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: rag-frontend
+    ports:
+      - "3001:3001"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    container_name: rag-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
+
+
