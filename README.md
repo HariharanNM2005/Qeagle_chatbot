@@ -17,7 +17,7 @@ This repository contains a production‑ready Retrieval‑Augmented Generation (
 - Backend: `backend/app` (FastAPI + MongoDB + sentence‑transformers)
 - Database: MongoDB (local via Docker or external Atlas)
 
-![Architecture Diagram](Architecture%20daigram.png)
+![Architecture Diagram](./Architecture%20diagram.png)
 
 ---
 
